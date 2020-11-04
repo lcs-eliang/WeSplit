@@ -21,16 +21,27 @@ struct ContentView: View {
             Form {
                 Section {
                     TextField("Amount", text: $checkAmount)
-                        .keyboardType(.decimalPad)
-                
+                         .keyboardType(.decimalPad)
+                    
+                    
                     Picker("Number of people", selection:
                        $numberOfPeople) {
                         ForEach(2 ..< 100) {
                             Text("\($0) people")
+       
+                        }
+                       }
+                }
+                
+                Section(header: Text("How much tip do you want to leave?")) {
+                    Picker("Tip percentage", selection:
+                        $tipPercentage) {
+                        ForEach(0 ..< tipPercentages.count) {
+                            Text("\(self.tipPercentages[$0])%")
                         }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
-            
                 Section {
                     Text("$\(checkAmount)")
                 }
